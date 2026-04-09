@@ -48,8 +48,20 @@ In Claude Code or similar environments, type:
 Simply answer 3 questions (Codename, Basic Info, Personality) and then choose your data sources.
 
 ### 3. Providing "Soul" Materials
-The system supports:
+
+To make the twin as accurate as possible, it is recommended to provide as much source material as possible. The system supports the following sources:
+
+| Source | Chat Logs | Docs / Knowledge Base | Notes |
+| :--- | :---: | :---: | :--- |
+| **WeChat** | ✅ SQLite / JSON | — | Supports decrypted DB or WeChatMsg exports |
+| **Feishu** | ✅ API / JSON | ✅ Wiki / Docs | Recommended via auto-collector scripts |
+| **DingTalk** | ✅ Browser Grab | ✅ Knowledge Base | API has significant restrictions |
+| **Work Files** | ✅ | ✅ PDF / MD | Your PRDs, architecture diagrams, weekly reports |
+| **Others** | ✅ Emails / Audio | — | Supports .eml and screenshots |
+
+System tools:
 *   **Auto-Collection**: Pull your personal Feishu/DingTalk message history and documents.
+*   **WeChat Import**: Use `tools/wechat_collector.py` to import decrypted databases or JSON exports.
 *   **File Import**: Upload your PRDs, tech specs, or Code Review comments.
 *   **Direct Paste**: Any text that captures your thinking logic or speaking style.
 

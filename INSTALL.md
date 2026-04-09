@@ -57,22 +57,24 @@ pip3 install openpyxl        # Excel .xlsx 转 CSV
 
 ### 平台方案选择指南
 
-| 场景 | 推荐方案 |
-|------|---------|
-| 飞书用户，有 App 权限 | `feishu_auto_collector.py` |
-| 飞书内部文档（无 App 权限）| `feishu_browser.py` |
-| 飞书手动指定链接 | `feishu_mcp_client.py` |
-| 钉钉用户 | `dingtalk_auto_collector.py` |
-| 钉钉消息采集失败 | 手动截图 → 上传图片 |
-| Slack 用户 | `slack_auto_collector.py` |
+| 场景                        | 推荐方案                       |
+| --------------------------- | ------------------------------ |
+| 飞书用户，有 App 权限       | `feishu_auto_collector.py`   |
+| 飞书内部文档（无 App 权限） | `feishu_browser.py`          |
+| 飞书手动指定链接            | `feishu_mcp_client.py`       |
+| 钉钉用户                    | `dingtalk_auto_collector.py` |
+| 钉钉消息采集失败            | 手动截图 → 上传图片           |
+| Slack 用户                  | `slack_auto_collector.py`    |
 
 **飞书自动采集初始化**：
+
 ```bash
 python3 tools/feishu_auto_collector.py --setup
 # 输入飞书开放平台的 App ID 和 App Secret
 ```
 
 **钉钉自动采集初始化**：
+
 ```bash
 python3 tools/dingtalk_auto_collector.py --setup
 # 输入钉钉开放平台的 AppKey 和 AppSecret
@@ -80,11 +82,13 @@ python3 tools/dingtalk_auto_collector.py --setup
 ```
 
 **飞书 MCP 初始化**（手动指定链接时使用）：
+
 ```bash
 python3 tools/feishu_mcp_client.py --setup
 ```
 
 **飞书浏览器方案**（首次使用会弹窗登录，之后自动复用登录态）：
+
 ```bash
 python3 tools/feishu_browser.py \
   --url "https://xxx.feishu.cn/wiki/xxx" \
@@ -92,6 +96,7 @@ python3 tools/feishu_browser.py \
 ```
 
 **Slack 自动采集初始化**：
+
 ```bash
 pip3 install slack-sdk
 python3 tools/slack_auto_collector.py --setup
@@ -126,17 +131,17 @@ python3 tools/slack_auto_collector.py --setup
 
 进入 **OAuth & Permissions** → **Bot Token Scopes** → **Add an OAuth Scope**，添加以下权限：
 
-| Scope | 用途 |
-|-------|------|
-| `users:read` | 搜索用户列表（必需） |
-| `channels:read` | 列出 public channels（必需） |
-| `channels:history` | 读取 public channel 历史消息（必需） |
-| `groups:read` | 列出 private channels（必需） |
-| `groups:history` | 读取 private channel 历史消息（必需） |
-| `mpim:read` | 列出群 DM（可选） |
-| `mpim:history` | 读取群 DM 历史消息（可选） |
-| `im:read` | 列出 DM（可选，需用户授权） |
-| `im:history` | 读取 DM 历史消息（可选，需用户授权） |
+| Scope                | 用途                                  |
+| -------------------- | ------------------------------------- |
+| `users:read`       | 搜索用户列表（必需）                  |
+| `channels:read`    | 列出 public channels（必需）          |
+| `channels:history` | 读取 public channel 历史消息（必需）  |
+| `groups:read`      | 列出 private channels（必需）         |
+| `groups:history`   | 读取 private channel 历史消息（必需） |
+| `mpim:read`        | 列出群 DM（可选）                     |
+| `mpim:history`     | 读取群 DM 历史消息（可选）            |
+| `im:read`          | 列出 DM（可选，需用户授权）           |
+| `im:history`       | 读取 DM 历史消息（可选，需用户授权）  |
 
 ---
 
@@ -168,6 +173,7 @@ python3 tools/slack_auto_collector.py --setup
 按提示粘贴 Bot Token，脚本会自动验证并保存到 `~/.my-skill/slack_config.json`。
 
 配置成功后你会看到：
+
 ```
 验证 Token ... OK
   Workspace：Your Company，Bot：my-skill-bot
@@ -192,6 +198,7 @@ python3 tools/slack_auto_collector.py --name "张三" --msg-limit 500 --channel-
 ```
 
 输出文件：
+
 ```
 knowledge/张三/
 ├── messages.txt            # 按权重分类的消息记录
@@ -202,14 +209,14 @@ knowledge/张三/
 
 ### 常见报错与解决
 
-| 报错 | 原因 | 解决 |
-|------|------|------|
+| 报错                                | 原因               | 解决                                                                   |
+| ----------------------------------- | ------------------ | ---------------------------------------------------------------------- |
 | `missing_scope: channels:history` | Bot Token 缺少权限 | 回到 api.slack.com → OAuth & Permissions 添加对应 Scope，重新安装 App |
-| `invalid_auth` | Token 无效或已吊销 | 重新运行 `--setup` 配置新 Token |
-| `not_in_channel` | Bot 未加入该频道 | 在 Slack 里 `/invite @bot` 邀请 Bot |
-| 未找到用户 | 姓名拼写不对 | 改用英文用户名（如 `john.doe`）或 Slack display name |
-| 消息只有 90 天 | 免费版限制 | 升级 Workspace 或手动补充截图 |
-| 速率限制（429）| 请求太频繁 | 脚本会自动等待重试，无需手动处理 |
+| `invalid_auth`                    | Token 无效或已吊销 | 重新运行 `--setup` 配置新 Token                                      |
+| `not_in_channel`                  | Bot 未加入该频道   | 在 Slack 里 `/invite @bot` 邀请 Bot                                  |
+| 未找到用户                          | 姓名拼写不对       | 改用英文用户名（如 `john.doe`）或 Slack display name                 |
+| 消息只有 90 天                      | 免费版限制         | 升级 Workspace 或手动补充截图                                          |
+| 速率限制（429）                     | 请求太频繁         | 脚本会自动等待重试，无需手动处理                                       |
 
 ## 快速验证
 
