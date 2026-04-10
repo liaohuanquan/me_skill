@@ -78,3 +78,8 @@ pip install -r requirements.txt
 系统会通过 **Correction (纠正层)** 实时学习并收敛分身表现。
 
 别让你的宝贵经验随着岁月流逝，趁现在，把最好的自己存下来吧。
+
+## 开源许可
+
+本项目采用 [MIT License](LICENSE) 许可协议。
+

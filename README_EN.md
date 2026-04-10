@@ -78,3 +78,8 @@ If the twin doesn't act like you, correct it directly:
 The system learns in real-time through the **Correction layer** to tighten its performance.
 
 Don't let your hard-earned experience fade away. Back up the best version of yourself today.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
